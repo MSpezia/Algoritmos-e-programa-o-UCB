@@ -1,0 +1,23 @@
+algoritmo roloFios;
+// Síntese
+//  Objetivo: calcular quantidade de rolos de fio necessario 
+//  Entrada : metros
+//  Saída   : quantidade de rolos
+
+
+principal
+	// Declarações
+	inteiro quantidadeRolos, metros, fios;
+	// Instruções
+ 	//Pedir a distancia e calcular a quantidade de rolos necessario
+ 	escreva("Insira a distancia em metros: ");
+ 	leia(metros);
+ 	quantidadeRolos = metros/50;
+ 	fios = metros mod 50;
+ 	escreva("Quantidade de rolos necessários: ");
+ 	escreval(quantidadeRolos);
+ 	escreva("Quantidade de fios avulsos necessários: ");
+ 	escreva(fios);
+ 	
+ 	
+fimPrincipal

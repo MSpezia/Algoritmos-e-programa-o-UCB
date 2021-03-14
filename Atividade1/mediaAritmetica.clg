@@ -1,0 +1,23 @@
+algoritmo mediaAritmetica;
+// Síntese
+//  Objetivo:Calcular a media aritmetica de 3 numeros dados
+//  Entrada : Numeros a, b e c
+//  Saída   : media aritmetica
+
+
+principal
+	// Declarações
+	real a,b,c,d;
+	// Instruções
+	// Pedir os tres numeros e enviar a resposta de sua media aritmetica
+	escreva("Insira o primeiro numero: ");
+	leia(a);
+	escreva("Insira o segundo numero: ");
+	leia(b);
+	escreva("Insira o terceiro numero: ");
+	leia(c);
+	d= (a+b+c)/3;
+	escreva("Sua resposta é: ");
+	escreva(d);
+
+fimPrincipal

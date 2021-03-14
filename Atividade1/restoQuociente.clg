@@ -1,0 +1,23 @@
+algoritmo restoQuociente;
+// Síntese
+//  Objetivo: calcular o resto e o quociente da divisão de 2 numeros dados 
+//  Entrada : dividendo e divisor
+//  Saída   : resto e quociente
+
+
+principal
+	// Declarações
+	inteiro dividendo,divisor,resto,quociente;
+	// Instruções
+	//Solicitar ao usuario o dividendo e o divisor e calcular o resto e quociente
+	escreva("Insira o Dividendo: ");
+	leia(dividendo);
+	escreva("Insira o Divisor: ");
+	leia(divisor);
+	quociente = dividendo / divisor;
+	escreva("quociente: ");
+	escreval(quociente);
+	resto = dividendo mod divisor;
+	escreva("resto: ");
+	escreval(resto);
+fimPrincipal

@@ -1,0 +1,40 @@
+algoritmo calculoSalario;
+// Síntese
+//  Objetivo:  um programa que leia o nome do funcionário, o sexo (F ou M), o número de
+//matrícula do funcionário, o número de horas trabalhadas, o valor que recebe por hora
+//e calcule o salário desse funcionário. A seguir, mostre todos os dados na tela, os dados
+//de entrada e os dados de saída
+//  Entrada :o nome do funcionário, o sexo (F ou M), o número de
+//matrícula do funcionário, o número de horas trabalhadas, o valor que recebe por hora 
+//  Saída   :nome do funcionário, o sexo (F ou M), o número de
+//matrícula do funcionário, o número de horas trabalhadas, o valor que recebe por hora
+//e calcule o salário desse funcionário
+
+
+principal
+	// Declarações
+	texto nome,sexo;
+	inteiro matricula,horas,ganhoHora,salario;
+	// Instruções
+	// ler as informações, calcular o salario, reescrever as informações mais o salario
+	escreva("Nome do funcionario: ");
+	leia(nome);
+	escreva("Sexo do funcionario: ");
+	leia(sexo);
+	escreva("Matricula do funcionario: ");
+	leia(matricula);
+	escreva("Horas que trabalja: ");
+	leia(horas);
+	escreva("Ganho por hora: ");
+	leia(ganhoHora);
+	salario = horas * ganhoHora;
+	escreval("___________");
+	escreval("Ficha do funcionário");
+	escreval("Nome: " + nome);
+	escreval("Sexo: " + sexo);
+	escreval("Matricula: " + matricula);
+	escreval("Horas que trabalha por dia: " + horas);
+	escreval("Ganho por hora: " + ganhoHora + "R$");
+	escreva("Salario: " + salario + "R$ por dia");
+
+fimPrincipal

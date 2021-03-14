@@ -1,0 +1,21 @@
+algoritmo horasParaMinutosSegundos;
+// Síntese
+//  Objetivo:  Construir um algoritmo que transforme horas em minutos e segundos
+//  Entrada : hora
+//  Saída   : minutos e segundos
+
+
+principal
+	// Declarações
+	real hora;
+	inteiro minutos,segundos;
+	// Instruções
+	//perguntar ao usuario as horas
+	escreva("Digite a quantidade de horas: ");
+	leia(hora);
+	escreva(hora);escreval(" horas são:");
+	minutos = hora *60 ;
+	escreva(minutos);escreval(" minutos ");
+	segundos = hora *3600 ;
+	escreva(segundos);escreva(" segundos");
+fimPrincipal

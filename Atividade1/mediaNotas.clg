@@ -1,0 +1,25 @@
+algoritmo mediaNotas;
+// Síntese
+//  Objetivo:  calcular a meida ponderada de duas notas de um aluno
+//  Entrada : a e b
+//  Saída   : media ponderada
+
+
+principal
+	// Declarações
+	real notaA,notaB,media;
+	// Instruções
+	//Pedir as duas notas para o usuario e calcular a media ponderada das duas
+	escreva("Insira nota 1: ");
+	leia(notaA);
+	escreva("Insira nota 2: ");
+	leia(notaB);
+	se(notaA<0)entao notaA=0; fimSe
+	se(notaA>10)entao notaA=10; fimSe
+	se(notaB<0)entao notaB=0; fimSe
+	se(notaB>10)entao notaB=10; fimSe
+	media = (notaA*3.5 + notaB*7.5)/11;
+	escreva("Media das notas: ");
+	escreva(media);
+	
+fimPrincipal
