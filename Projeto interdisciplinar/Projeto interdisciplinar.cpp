@@ -1,18 +1,18 @@
 #include<stdio.h>//Comando de entrada e saida
 #include<stdlib.h>//Limpa tela
-int main(){//Inicialização do codigo
+int main(){//InicializaÃ§Ã£o do codigo
 	//Variaveis
 	char nome[32],sobrenome[32],senha[32],email[32],anamnese;
 	int dia,mes,ano,estiloTatuagem,menuInicial,horas,minutos;
 	char sexo,continuar;
 	float cpf;
-	//Uso do livro codifo limpo na nomeação de variaveis e redução de detalhes desnecessarios no codigo
+	//Uso do livro codigo limpo na nomeaÃ§Ã£o de variaveis e reduÃ§Ã£o de detalhes desnecessarios no codigo
 	while(true){
 		while(true){
 			//Menu para o usuario escolher entre fazer registro e agendar tatuagem
 			printf("Qual acao deseja realizar?\n1 - Fazer registro\n2 - Agendar uma tatuagem\n");
 			scanf("%d", &menuInicial);
-			if(menuInicial < 1 or menuInicial > 2){//Validação do menu
+			if(menuInicial < 1 or menuInicial > 2){//ValidaÃ§Ã£o do menu
 				system("cls");
 				printf("Opcao invalida, tente novamente.\n");
 			}else break;
@@ -36,11 +36,11 @@ int main(){//Inicialização do codigo
 			while(true){
 			printf("Data de nascimento(dia mes ano): ");
 			scanf("%d %d %d", &dia,&mes,&ano);
-			if(ano > 2003){//Se for menor de 18 o sistema fecha pois não é permitido registro de menores de 18
+			if(ano > 2003){//Se for menor de 18 o sistema fecha pois nÃ£o Ã© permitido registro de menores de 18
 				printf("Voce tem menos de 18 anos.");
 				return 0;
 			}
-			//Validação simples do dia e do mes
+			//ValidaÃ§Ã£o simples do dia e do mes
 			if(dia > 31 or dia < 1 or mes > 12 or mes < 1){
 				printf("Algo foi digitado errado, digite novamente\n");
 			}else break;
@@ -57,7 +57,7 @@ int main(){//Inicialização do codigo
 		printf("Senha: ");
 		scanf("%s", senha);
 		system("cls");
-		//Impressão das variaveis
+		//ImpressÃ£o das variaveis
 		printf("Nome: %s\n", nome);
 		printf("Sobrenome: %s\n", sobrenome);
 		if(sexo == 'm' or sexo == 'M')
@@ -110,12 +110,12 @@ int main(){//Inicialização do codigo
 				printf("Qual estilo de tatuagem deseja fazer?(Digite o numero ao lado do estilo)\n");
 				printf("Old School - 1\nNew School e Bold Line - 2\nTribal e Oriental - 3\nDesenhos geometricos - 4\nAquarela e Portrait - 5\n ");
 				scanf("%d", &estiloTatuagem);
-				if(estiloTatuagem > 5 or estiloTatuagem < 1){//Validação do menu de tatuagem
+				if(estiloTatuagem > 5 or estiloTatuagem < 1){//ValidaÃ§Ã£o do menu de tatuagem
 					printf("Opcao nao existente, digite novamente.\n");
 				}else break;
 			}
 			system("cls");
-			//Impressão das variaveis
+			//ImpressÃ£o das variaveis
 			printf("REVISAO DO AGENDAMENTO:\n");
 			printf("Data: %d/%d\n", dia, mes);
 			printf("Horario: %d:%d\n", horas,minutos);
@@ -124,7 +124,7 @@ int main(){//Inicialização do codigo
 			else
 				printf("Ficha de anamnese: nao\n");
 			printf("Estilo de tatuagem: ");
-			switch(estiloTatuagem){//switch com as opções de tatuagem
+			switch(estiloTatuagem){//switch com as opÃ§Ãµes de tatuagem
 				case 1: printf("Old School\n"); break;
 				case 2: printf("New School e Bold Line\n");break;
 				case 3: printf("Tribal e Oriental\n");break;
