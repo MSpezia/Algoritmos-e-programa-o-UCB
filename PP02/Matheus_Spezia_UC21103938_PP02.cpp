@@ -2,12 +2,12 @@
 #include<stdio.h>//Comando de entrada e saida
 #include<stdlib.h>//Necessario para limpar a tela
 #include<windows.h>//Necessario para colorir o texto
-int main(){//Começo do programa
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+int main(){//ComeÃ§o do programa
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);//Necessario para mudar a cor do texto
 	//Variaveis
 	char destino[32];
-	int quantAssentos, idade, menuAcao, reserva, cancelamento, compra;
-	float preco;
+	int quantAssentos, menuAcao, quantPessoas, i;
+	float preco, custoFinal;
 	
 	SetConsoleTextAttribute(hConsole, 15);//Pinta o texto de branco
 	//Entrada do destino pelo usuario
@@ -26,28 +26,46 @@ int main(){//Começo do programa
 	}
 	
 	system("cls");//Limpa tela
-	//Entrada do preço da passagem
+	//Entrada do preÃ§o da passagem
 	printf("Qual o preco da passagem? ");
 	scanf("%f", &preco);
-	//Entrada da idade do usuario usando while e if para validar a entrada
+	
+	system("cls");//Limpa tela
+	//Entrada da quantidade de pessoas usando while e if para validar a entrada
 	while(true){
-		printf("Qual sua idade? ");
-		scanf("%d", &idade);
-		if(idade < 0){
-		system("cls");
-		printf("Idade invalida, tente novamente.\n");
+		printf("Quantas pessoas irao viajar? ");
+		scanf("%d", &quantPessoas);
+		if(quantPessoas >= quantAssentos){
+			system("cls");
+			printf("Quantidade invalida, digite novamente.\n");
 		}else break;
 	}
-	//Caso a idade seja menor ou igual a 5 anos a passagem tem metade do preço
-	if(idade <= 5){
-		preco = preco/2;
+	
+	//Novas variaveis
+	int idade[quantPessoas], reserva[quantPessoas], cancelamento[quantPessoas], compra[quantPessoas];
+	//Entrada da idade dos pessoas usando while e if para validar a entrada
+	for(i = 1; i <= quantPessoas; i++){
+		while(true){
+			printf("Qual a idade da pessoa %d? ", i);
+			scanf("%d", &idade[i]);
+			if(idade < 0){
+			system("cls");
+			printf("Idade invalida, tente novamente.\n");
+			}else break;
+		}
+	//Caso a idade seja menor ou igual a 5 anos a passagem tem metade do preÃ§o
+		if(idade[i] <= 5){
+			custoFinal += preco/2;
+		}else{
+			custoFinal += preco;
+		}
 	}
 	
 	system("cls");//Limpa tela
 	
-	char ocupacao[quantAssentos];//Nova variavel usada mais tarde para verificações
+	char ocupacao[quantAssentos];//Nova variavel usada mais tarde para verificaÃ§Ãµes
 	//Sistema for para imprimir o mapa de assentos e guardar o estado do assento
-	for(int i = 1; i <= quantAssentos; i++){
+	for(i = 1; i <= quantAssentos; i++){
 		if(i % 7 == 0 or i % 13 == 0){
 			SetConsoleTextAttribute(hConsole, FOREGROUND_RED);//Pinta texto de vermelho
 			printf("R");
@@ -67,7 +85,7 @@ int main(){//Começo do programa
 			printf("\n");
 	}
 	SetConsoleTextAttribute(hConsole, 15);//Volta a cor do texto para branco
-	//Menu para o usuario escolher sua ação com while e if para validar a ação
+	//Menu para o usuario escolher sua aÃ§Ã£o com while e if para validar a aÃ§Ã£o
 	while(true){
 		printf("\nO que voce deseja fazer?\n1 - Efetuar uma reserva\n2 - Cancelar uma reserva\n3 - Confirmar a compra da reserva\n");
 		scanf("%d", &menuAcao);
@@ -78,58 +96,88 @@ int main(){//Começo do programa
 	}
 	//Sistema para reservar um assento usando while e if para validar se o assento esta disponivel
 	if(menuAcao == 1){
-		while(true){
-			printf("Qual assento deseja reservar? ");
-			scanf("%d", &reserva);
-			if(ocupacao[reserva] != 'R' and ocupacao[reserva] != 'C' and ocupacao[reserva] != 'D'){
-				printf("Opcao invalida, tente novamente.\n");
-			}else if(ocupacao[reserva] == 'R'){
-				printf("Assento ja reservado, escolha outro.\n");
-			}else if(ocupacao[reserva] == 'C'){
-				printf("Assento ja comprado, escolha outro.\n");
-			}else break;
+		for(i = 1; i <= quantPessoas; i++){
+			while(true){
+				printf("Qual assento deseja reservar? ");
+				scanf("%d", &reserva[i]);
+				if(ocupacao[reserva[i]] != 'R' and ocupacao[reserva[i]] != 'C' and ocupacao[reserva[i]] != 'D'){
+					printf("Opcao invalida, tente novamente.\n");
+				}else if(ocupacao[reserva[i]] == 'R'){
+					printf("Assento ja reservado, escolha outro.\n");
+				}else if(ocupacao[reserva[i]] == 'C'){
+					printf("Assento ja comprado, escolha outro.\n");
+				}else break;
+			}
+			ocupacao[reserva[i]] = 'R';
 		}
 		system("cls");
 		//Resposta do sistema
-		printf("RESERVA EFETUADA COM SUCESSO!\nDESTINO: %s\nPRECO: %.2f REAIS\nNUMERO DO ASSENTO: %d\nOBRIGADO POR ESCOLHER SALUMAR LINHAS AEREAS!", destino, preco, reserva);
+		printf("RESERVA EFETUADA COM SUCESSO!\nDESTINO: %s\nPRECO: %.2f REAIS\nNUMERO DO ASSENTO: ",destino, custoFinal);
+		for(i = 1; i <= quantPessoas; i++){
+			printf("%d",reserva[i]);
+			if(i < quantPessoas){
+				printf(", ");
+			}
+		}
+		printf("\nOBRIGADO POR ESCOLHER SALUMAR LINHAS AEREAS!");
 	}
 	//Sistema de cancelamento de reserva com while e if para validar se o assento ja foi reservado
 	if(menuAcao == 2){
-		while(true){
-			printf("Qual assento deseja cancelar a reserva? ");
-			scanf("%d", &cancelamento);
-			if(ocupacao[cancelamento] != 'R' and ocupacao[cancelamento] != 'C' and ocupacao[cancelamento] != 'D'){
-				printf("Opcao invalida, tente novamente.\n");
-			}else if(ocupacao[cancelamento] == 'C'){
-				printf("Assento ja comprado e nao pode ser cancelado, escolha outro.\n");
-			}else if(ocupacao[cancelamento] == 'D'){
-				printf("Assento nao reservado, escolha outro.\n");
-			}else if(ocupacao[cancelamento] == 'R'){
-				break;
+		for(i = 1; i <= quantPessoas; i++){
+			while(true){
+				printf("Qual assento deseja cancelar a reserva? ");
+				scanf("%d", &cancelamento[i]);
+				if(ocupacao[cancelamento[i]] != 'R' and ocupacao[cancelamento[i]] != 'C' and ocupacao[cancelamento[i]] != 'D'){
+					printf("Opcao invalida, tente novamente.\n");
+				}else if(ocupacao[cancelamento[i]] == 'C'){
+					printf("Assento ja comprado e nao pode ser cancelado, escolha outro.\n");
+				}else if(ocupacao[cancelamento[i]] == 'D'){
+					printf("Assento nao reservado, escolha outro.\n");
+				}else if(ocupacao[cancelamento[i]] == 'R'){
+					break;
+				}
 			}
+			ocupacao[cancelamento[i]] = 'D';
 		}
 		system("cls");
 		//Resposta do sistema
-		printf("CANCELAMENTO EFETUADO COM SUCESSO!\nDESTINO: %s\nNUMERO DO ASSENTO: %d\nADEUS.", destino, cancelamento);
-	}
-	//Sistema de confirmação de compra usando o while e if para verificar se o assento ja foi reservado
-	if(menuAcao == 3){
-		while(true){
-			printf("Qual assento deseja confirmar a compra? ");
-			scanf("%d", &compra);
-			if(ocupacao[compra] != 'R' and ocupacao[compra] != 'C' and ocupacao[compra] != 'D'){
-				printf("Opcao invalida, tente novamente.\n");
-			}else if(ocupacao[compra] == 'C'){
-				printf("Assento ja comprado, escolha outro.\n");
-			}else if(ocupacao[compra] == 'D'){
-				printf("E necessario reservar um assento antes de comprar, escolha outro.\n");
-			}else if(ocupacao[compra] == 'R'){
-				break;
+		printf("CANCELAMENTO EFETUADO COM SUCESSO!\nDESTINO: %s\nNUMERO DOS ASSENTOS CANCELADOS: ", destino);
+		for(i = 1; i <= quantPessoas; i++){
+			printf("%d",cancelamento[i]);
+			if(i < quantPessoas){
+				printf(", ");
 			}
-		}	
+		}
+		printf("\nADEUS.");
+	}
+	//Sistema de confirmaÃ§Ã£o de compra usando o while e if para verificar se o assento ja foi reservado
+	if(menuAcao == 3){
+		for(i = 1; i <= quantPessoas; i++){
+			while(true){
+				printf("Qual assento deseja confirmar a compra? ");
+				scanf("%d", &compra[i]);
+				if(ocupacao[compra[i]] != 'R' and ocupacao[compra[i]] != 'C' and ocupacao[compra[i]] != 'D'){
+					printf("Opcao invalida, tente novamente.\n");
+				}else if(ocupacao[compra[i]] == 'C'){
+					printf("Assento ja comprado, escolha outro.\n");
+				}else if(ocupacao[compra[i]] == 'D'){
+					printf("E necessario reservar um assento antes de comprar, escolha outro.\n");
+				}else if(ocupacao[compra[i]] == 'R'){
+					break;
+				}
+			}
+			ocupacao[compra[i]] = 'C';	
+		}
 		system("cls");
 		//Resposta do sistema
-		printf("COMPRA EFETUADA COM SUCESSO!\nDESTINO: %s\nPRECO: %.2f REAIS\nNUMERO DO ASSENTO: %d\nOBRIGADO POR ESCOLHER SALUMAR LINHAS AEREAS!", destino, preco, compra);
+		printf("COMPRA EFETUADA COM SUCESSO!\nDESTINO: %s\nNUMERO DOS ASSENTOS COMPRADOS: ", destino);
+		for(i = 1; i <= quantPessoas; i++){
+			printf("%d",compra[i]);
+			if(i < quantPessoas){
+				printf(", ");
+			}
+		}
+		printf("\nOBRIGADO POR ESCOLHER SALUMAR LINHAS AEREAS!");
 	}
 	
 	return 0;//Fim do programa
